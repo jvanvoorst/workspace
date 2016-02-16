@@ -45,3 +45,25 @@ fs2[0]();
 fs2[1]();
 fs2[2]();
 
+//another use of closure with the outer function being called twice creating two language variables that the 
+//inner returned function has access to only the one that was created when the function was created
+function makeGreeting(language) {
+	return function(firstname, lastname) {
+		if (language === 'en') {
+			console.log('Hello ' + firstname + ' ' + lastname);
+		}
+		if (language === 'es') {
+			console.log('Hola ' + firstname + ' ' + lastname);
+		}
+	}
+}
+
+var greetEnglish = makeGreeting('en');
+var greetSpanish = makeGreeting('es');
+
+//when this function is executed it has closure over the language variable = 'en'
+//that was created in the makeGreeting execution context 
+greetEnglish('John', 'Doe');
+// and in turn this one has closure over the language variable = 'es'
+greetSpanish('John', 'Doe');
+
